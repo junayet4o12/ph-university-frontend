@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Form, Input } from "antd";
 import { HTMLInputTypeAttribute } from "react";
 import { Controller } from "react-hook-form";
 
@@ -9,12 +9,11 @@ interface TInputProps {
 }
 export default function PHInput({ name, type, label }: TInputProps) {
     return (
-        <div style={{marginBottom: '1rem'}}>
-            {label ? label : null}
+        <div style={{paddingBottom: '1rem'}}>
             <Controller
                 name={name}
                 render={({ field }) => (
-                    <Input {...field} type={type || 'text'} />
+                   <Form.Item layout="vertical"  label={label}> <Input {...field} type={type || 'text'} /></Form.Item>
                 )}
             />
 

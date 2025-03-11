@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { TUser } from "../types";
 import PHForm from "../components/form/PHForm";
 import PHInput from "../components/form/PHInput";
+import { errorMessageGenerator } from "../utils/errorMessageGenerator";
 
 
 export default function Login() {
@@ -30,7 +31,6 @@ export default function Login() {
       id: data.id,
       password: data.password
     }
-    console.log(userInfo);
 
     const toastId = toast.loading('logging...')
     try {
@@ -42,8 +42,8 @@ export default function Login() {
       }))
       toast.success('Logged in successfully!', { id: toastId, duration: 2000 })
       navigate(`/${user.role}/dashboard`)
-    } catch (err) {
-      toast.error(`${err?.status}: ${err?.data?.message}`, { id: toastId, duration: 2000 })
+    } catch (err: any) {
+      toast.error(errorMessageGenerator(err), { id: toastId, duration: 2000 })
     }
   }
   return (
